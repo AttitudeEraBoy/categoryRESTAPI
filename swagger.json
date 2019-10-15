@@ -1,0 +1,334 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This Rest API defined to do some transactions in the web server by some methods.",
+    "version": "1.0.0",
+    "title": "Categories Rest API",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "ural_ugur@hotmail.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "Songs",
+      "description": "Everything about the Songs"
+    },
+    {
+      "name": "categories",
+      "description": "Operations about categories"
+    },
+    {
+      "name": "popular",
+      "description": "Operations about popularity of the songs"
+    },
+    {
+      "name": "rate",
+      "description": "Liking and disliking the song"
+    }
+  ],
+  "paths": {
+    "/songs": {
+      "get": {
+        "tags": [
+          "Songs"
+        ],
+        "summary": "Retrieves all the songs from the database",
+        "description": "Getting all the songs and their fields regardless of their category",
+        "operationId": "getSong",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Songs"
+        ],
+        "summary": "Add a new song to the database",
+        "description": "",
+        "operationId": "addSong",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Song object that needs to be added to the database",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Song"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/songs/{_id}": {
+      "get": {
+        "tags": [
+          "Songs"
+        ],
+        "summary": "Get a song",
+        "description": "",
+        "operationId": "getSongById",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "description": "ID of song to return",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Songs"
+        ],
+        "summary": "Update an existing song",
+        "description": "",
+        "operationId": "updateSong",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "_id",
+            "type": "string",
+            "description": "Song that needs to be updated in the database",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Song that needs to be updated to the database",
+            "schema": {
+              "$ref": "#/definitions/Song"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Songs"
+        ],
+        "summary": "Delete an existing song",
+        "description": "",
+        "operationId": "deleteSong",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "_id",
+            "type": "string",
+            "description": "Song id that is going to used in the process",
+            "required": true
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/categories": {
+      "get": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "Retrieves all the categories from the database",
+        "description": "Getting all the categories and their fields regardless of their category",
+        "operationId": "getCategory",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/categories/{category}": {
+      "get": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "Get a category by name",
+        "description": "",
+        "operationId": "getCategoryByName",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "path",
+            "description": "Name of category to return",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/popular": {
+      "get": {
+        "tags": [
+          "popular"
+        ],
+        "summary": "Retrieves the most popular song from the database",
+        "description": "Getting the most popular song",
+        "operationId": "getPopularSong",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/rate/{_id}": {
+      "post": {
+        "tags": [
+          "rate"
+        ],
+        "summary": "Liking a song according to its id",
+        "description": "Like the song",
+        "operationId": "likeSong",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "description": "ID of the song to like",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "rate"
+        ],
+        "summary": "Disliking a song according to its id",
+        "description": "Dislike the song",
+        "operationId": "dislikeSong",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "description": "ID of the song to dislike",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Song": {
+      "type": "object",
+      "properties": {
+        "artist": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "number"
+        },
+        "liked": {
+          "type": "number"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
