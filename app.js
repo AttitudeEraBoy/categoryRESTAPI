@@ -34,4 +34,4 @@ mongoose.connect(process.env.DB_CONNECTION,
 
 app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.listen(process.env.port || 3000);
+app.listen(process.env.PORT || 3000);
